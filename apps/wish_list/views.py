@@ -40,7 +40,7 @@ def add_item(request):
 
 def display_item(request, id):
     item = Item.objects.get(id=id)
-    added_by = User.objects.get(user=item.added_by.id)
+    added_by = User.objects.get(id=request.session['user_id'])
     context = {
         'item': item,
         'wishers': Wisher.objects.filter(item=item).exclude(user=added_by)
