@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{{item.item}}</title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'wish_list/css/style.css' %}">
+  </head>
+  <body>
+    <div class="navbar">
+      <h3>{{item.item}}</h3>
+      <a href="{% url 'wish_list:dashboard' %}">Home</a>
+      <a href="{% url 'login_registration:logout' %}">Log Out</a>
+    </div>
+    <div class="container">
+      <p>Users who added this item to their Wish List:</p>
+      {% if wishers %}
+        <ul>
+          {% for wisher in wishers %}
+            <li>{{wisher.first_name}} {{wisher.last_name}}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+    <div class="errors">
+      {% if messages %}
+        {% for message in messages %}
+          <p>{{message}}</p>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </body>
+</html>
